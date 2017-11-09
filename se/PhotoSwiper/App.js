@@ -7,7 +7,15 @@
 // react-native run-ios
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button, TouchableHighlight, Image } from 'react-native';
+import { Platform, 
+		StyleSheet, 
+		Text, 
+		View, 
+		Button, 
+		TouchableHighlight, 
+		Image, 
+		Kaese 
+	} from 'react-native';
 
 const instructions = Platform.select({
 	ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -23,8 +31,10 @@ export default class App extends Component {
 			<View style={styles.container}>
 				<Kaese />
 				<Image source={pic} style={{ width: 193, height: 110 }} />
-				<TouchableHighlight backgroundColor="#12A4A4" underlayColor="#12A4A4" onPress={() => {}}>  
-        <Text>FUCK YOU</Text>      
+				<TouchableHighlight 
+					backgroundColor="#12A4A4" 
+					underlayColor="#12A4A4" 
+					onPress={() => {}}>  
 				</TouchableHighlight>
 				<Text style={styles.command}>Click Morty</Text>
 			</View>
@@ -34,14 +44,17 @@ export default class App extends Component {
 class Kaese extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			counter: 0,
-			showText: true
-		};
+		this.state = {value:0};
+		this.handleClick = this.handleClick.bind(this);
+	
+	handleClick = (prevState) => {
+		this.setState({value: prevState.value + 1});
+		console.log(this.state.value)
+		  }		
 	}
 	render() {
-		counter = this.state.counter;
-		return <Text style={styles.welcome}> {counter} </Text>;
+		value = this.state.value;
+		return <Text style={styles.welcome}> {value} </Text>;
 	}
 }
 
