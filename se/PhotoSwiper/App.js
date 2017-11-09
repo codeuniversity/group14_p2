@@ -44,19 +44,29 @@ export default class App extends Component {
 class Kaese extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {value:0};
-		this.handleClick = this.handleClick.bind(this);
-	
-	handleClick = (prevState) => {
-		this.setState({value: prevState.value + 1});
-		console.log(this.state.value)
-		  }		
+		this.state = {count:1};
+	}
+	onclick(type){
+		this.setState(prevState => {
+		   return {count: type=='add' ? prevState.count+1: prevState.count-1}
+		});
 	}
 	render() {
-		value = this.state.value;
-		return <Text style={styles.welcome}> {value} </Text>;
+		return (
+		  <div>
+			Count: {this.state.count}
+			<br/>
+			<div style={{marginTop: '100px'}}/>
+			<input type='button' onClick={this.onclick.bind(this, 'add')} value='Inc'/>
+			<input type='button' onClick={this.onclick.bind(this, 'sub')} value='Dec'/>
+		   </div>
+		 )
+	   }
 	}
-}
+	ReactDOM.render(
+		<App />,
+		document.getElementById('container')
+	  );	
 
 const styles = StyleSheet.create({
 	container: {
