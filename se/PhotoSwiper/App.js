@@ -14,11 +14,6 @@ export default class Swiper extends Component {
     return (
       <View>
       <Counter/>
-      <Button 
-        title="Don't touch!" 
-        onPress={() => {this.setState({value:10})}
-          }
-        />
       </View>
     );
   }
@@ -32,9 +27,16 @@ class Counter extends Component {
   render() {
     let value = this.state.value; 
     return (
-        <Text style={style.valueStyle}>
-        {value}
-        </Text>
+        <View>
+          <Text style={style.valueStyle}>
+          {value}
+          </Text>
+          <Button 
+            title="Meow" 
+            onPress={() => {this.setState({value: value+1})}
+            }
+          />
+        </View>
     );
   }
 }
