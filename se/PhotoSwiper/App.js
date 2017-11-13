@@ -24,20 +24,22 @@ class Counter extends Component {
     super(props);
     this.state = {value:0, valueLeft: 0, valueRight: 0}
   }
-  
+
   render() {
     let value = this.state.value; 
     let valueLeft = this.state.valueLeft;
     let valueRight = this.state.valueRight;
 
     return (
-      <View style= {{flex: 1, flexDirection: 'column'}}>
-        <View style= {{flex: 1, flexDirection: 'row'}}>
-            <Text style={style.valueStyle}> 
-              {value}
-            </Text>
+      <View style= {{flex: 1, 
+                     flexDirection: 'column'}}>
+        <View style= {{flex: 1, 
+                       flexDirection: 'row'}}>
             <Text style={style.valueStyle}> 
               {valueLeft}
+            </Text>
+            <Text style={style.valueStyle}> 
+              {value}
             </Text>
             <Text style={style.valueStyle}>
               {valueRight}
@@ -46,7 +48,10 @@ class Counter extends Component {
         <View style= {{flex: 1, 
                        flexDirection: 'row',
                        justifyContent: 'center',
-                       alignItems: 'center'}}>
+                       alignItems: 'center',
+                       marginLeft: 50,
+                       marginRight: 50,
+                       marginTop: 600}}>
             <Button 
                 title="Left" 
                 onPress={() => {this.setState({valueLeft: valueLeft+1, value: value+1})}
@@ -67,12 +72,14 @@ const style = StyleSheet.create ({
 valueStyle: {
   fontSize: 40,
   textAlign: 'center',
-  margin: 10,
-  fontWeight: '600',
+  marginTop: 500,
+  marginLeft: 10,
+  marginRight: 10,
+  fontWeight: '500',
   fontFamily: 'Times New Roman',
-  backgroundColor: '#12A4A4', 
+  backgroundColor: '#D3FEED', 
   height: 100,
-  width: 100
+  width: 100,
 }
 }
 );
