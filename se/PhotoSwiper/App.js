@@ -30,20 +30,15 @@ class Counter extends Component {
     let valueRight = this.state.valueRight;
     return (
         <View>
-            <Text style={style.valueStyle}> 
+          <Text style={style.valueStyle}> 
           {value}
           </Text>
-              <Button 
-                title="Meow" 
-                onPress={() => {this.setState({value: value+1})}
-               }
-              />
           <Text style={style.valueStyle}> 
           {valueLeft}
           </Text>
               <Button 
                 title="Left" 
-                onPress={() => {this.setState({valueLeft: valueLeft+2})}
+                onPress={() => {this.setState({valueLeft: valueLeft+1, value: value+1})}
                }
               />
            <Text style={style.valueStyle}>
@@ -51,7 +46,7 @@ class Counter extends Component {
           </Text>
               <Button 
                title="Right" 
-               onPress={() => {this.setState({valueRight: valueRight+3})}
+               onPress={() => {this.setState({valueRight: value+1, value: value+1})}
               }
               />
         </View>
