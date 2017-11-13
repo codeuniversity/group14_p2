@@ -64,7 +64,8 @@ export default class Swiper extends Component {
     
     return (
       <View>
-      <Image source={sources[1]} />
+      <Image source={sources[1]} 
+             style={style.photoStyle}/>
       <Counter/>
       </View>
     );
@@ -103,7 +104,7 @@ class Counter extends Component {
                        alignItems: 'center',
                        marginLeft: 50,
                        marginRight: 50,
-                       marginTop: 600}}>
+                       marginTop: 10}}>
             <Button 
                 title="Left" 
                 onPress={() => {this.setState({valueLeft: valueLeft+1, value: value+1})}
@@ -124,7 +125,7 @@ const style = StyleSheet.create ({
 valueStyle: {
   fontSize: 40,
   textAlign: 'center',
-  marginTop: 500,
+  marginTop: 50,
   marginLeft: 10,
   marginRight: 10,
   fontWeight: '500',
@@ -132,6 +133,12 @@ valueStyle: {
   backgroundColor: '#D3FEED', 
   height: 100,
   width: 100,
+},
+photoStyle: {
+  marginTop: 30,
+  marginRight: 5,
+  width: 400,
+  height: 400
 }
 }
 );
