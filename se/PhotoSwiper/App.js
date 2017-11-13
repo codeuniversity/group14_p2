@@ -24,32 +24,41 @@ class Counter extends Component {
     super(props);
     this.state = {value:0, valueLeft: 0, valueRight: 0}
   }
+  
   render() {
     let value = this.state.value; 
     let valueLeft = this.state.valueLeft;
     let valueRight = this.state.valueRight;
+
     return (
-        <View>
-          <Text style={style.valueStyle}> 
-          {value}
-          </Text>
-          <Text style={style.valueStyle}> 
-          {valueLeft}
-          </Text>
-              <Button 
+      <View style= {{flex: 1, flexDirection: 'column'}}>
+        <View style= {{flex: 1, flexDirection: 'row'}}>
+            <Text style={style.valueStyle}> 
+              {value}
+            </Text>
+            <Text style={style.valueStyle}> 
+              {valueLeft}
+            </Text>
+            <Text style={style.valueStyle}>
+              {valueRight}
+            </Text>
+        </View>
+        <View style= {{flex: 1, 
+                       flexDirection: 'row',
+                       justifyContent: 'center',
+                       alignItems: 'center'}}>
+            <Button 
                 title="Left" 
                 onPress={() => {this.setState({valueLeft: valueLeft+1, value: value+1})}
                }
               />
-           <Text style={style.valueStyle}>
-          {valueRight}
-          </Text>
-              <Button 
+            <Button 
                title="Right" 
-               onPress={() => {this.setState({valueRight: value+1, value: value+1})}
+               onPress={() => {this.setState({valueRight: valueRight+1, value: value+1})}
               }
               />
         </View>
+      </View>
     );
   }
 }
@@ -61,7 +70,9 @@ valueStyle: {
   margin: 10,
   fontWeight: '600',
   fontFamily: 'Times New Roman',
-  backgroundColor: '#12A4A4',  
+  backgroundColor: '#12A4A4', 
+  height: 100,
+  width: 100
 }
 }
 );
