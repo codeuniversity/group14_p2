@@ -22,20 +22,38 @@ export default class Swiper extends Component {
 class Counter extends Component {
   constructor(props){
     super(props);
-    this.state = {value:0}
+    this.state = {value:0, valueLeft: 0, valueRight: 0}
   }
   render() {
     let value = this.state.value; 
+    let valueLeft = this.state.valueLeft;
+    let valueRight = this.state.valueRight;
     return (
         <View>
-          <Text style={style.valueStyle}>
+            <Text style={style.valueStyle}> 
           {value}
           </Text>
-          <Button 
-            title="Meow" 
-            onPress={() => {this.setState({value: value+1})}
-            }
-          />
+              <Button 
+                title="Meow" 
+                onPress={() => {this.setState({value: value+1})}
+               }
+              />
+          <Text style={style.valueStyle}> 
+          {valueLeft}
+          </Text>
+              <Button 
+                title="Left" 
+                onPress={() => {this.setState({valueLeft: valueLeft+2})}
+               }
+              />
+           <Text style={style.valueStyle}>
+          {valueRight}
+          </Text>
+              <Button 
+               title="Right" 
+               onPress={() => {this.setState({valueRight: valueRight+3})}
+              }
+              />
         </View>
     );
   }
