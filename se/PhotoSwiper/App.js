@@ -121,12 +121,11 @@ onSwipe(gestureName, gestureState) {
       require('./TestPhotos/Photo49.jpg'),
       require('./TestPhotos/Photo50.jpg')]
 
+    
     return (
       <View style= {{flex: 1, 
                      flexDirection: 'column'}}>
-        <Image source={sources[photoIndex]} 
-                style={style.photoStyle}
-                resizeMode='contain'/>
+
         <GestureRecognizer
             onSwipe={(direction, state) => this.onSwipe(direction, state)}
             onSwipeLeft={(state) => this.onSwipeLeft(state)}
@@ -137,11 +136,12 @@ onSwipe(gestureName, gestureState) {
               backgroundColor: this.state.backgroundColor
             }}
             >
+            <Image source={sources[photoIndex]} 
+                style={style.photoStyle}
+                resizeMode='contain'/>
             <Text>{this.state.myText}</Text>
             <Text>onSwipe callback received gesture: {this.state.gestureName}</Text>
-        </GestureRecognizer>
-
-        <View style= {{flex: 1, 
+            <View style= {{flex: 1, 
                        flexDirection: 'row'}}>
             <Text style={style.valueStyle}> 
               {valueLeft}
@@ -169,6 +169,9 @@ onSwipe(gestureName, gestureState) {
                 onPress={() => {this.buttonRight(value,valueRight)}}
               />
         </View>
+        </GestureRecognizer>
+
+   
       </View>
     );
   }
@@ -188,7 +191,7 @@ valueStyle: {
   width: 100,
 },
 photoStyle: {
-  marginTop: 70,
+  marginTop: 60,
   marginRight: 5,
   width: 400,
   height: 400
