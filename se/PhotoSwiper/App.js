@@ -25,6 +25,14 @@ class Counter extends Component {
     super(props);
     this.state = {value:0, valueLeft: 0, valueRight: 0}
   }
+  buttonLeft (value,valueLeft) {
+    this.setState({valueLeft: valueLeft+1, value: value+1
+  })
+}
+  buttonRight (value,valueRight) {
+    this.setState({valueRight: valueRight+1, value: value+1
+  })
+}
 
   render() {
     let value = this.state.value; 
@@ -110,13 +118,11 @@ class Counter extends Component {
                        marginTop: 10}}>
             <Button 
                 title="Left" 
-                onPress={() => {this.setState({valueLeft: valueLeft+1, value: value+1})}
-               }
+                onPress={() => {this.buttonLeft(value,valueLeft)}}
               />
             <Button 
                 title="Right" 
-                onPress={() => {this.setState({valueRight: valueRight+1, value: value+1})}
-              }
+                onPress={() => {this.buttonRight(value,valueRight)}}
               />
         </View>
       </View>
