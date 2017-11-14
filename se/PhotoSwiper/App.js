@@ -86,7 +86,8 @@ class Counter extends Component {
       <View style= {{flex: 1, 
                      flexDirection: 'column'}}>
         <Image source={sources[value]} 
-                 style={style.photoStyle}/>
+                 style={style.photoStyle}
+                 resizeMode='contain'/>
         <View style= {{flex: 1, 
                        flexDirection: 'row'}}>
             <Text style={style.valueStyle}> 
