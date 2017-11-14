@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react';
 import {View, Text, StyleSheet, Button, Image} from 'react-native';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 export default class Swiper extends Component {
   render() {
@@ -23,15 +24,39 @@ export default class Swiper extends Component {
 class Counter extends Component {
   constructor(props){
     super(props);
-    this.state = {value:0, valueLeft: 0, valueRight: 0}
+    this.state = {value:0, 
+                  valueLeft: 0, 
+                  valueRight: 0,
+                  myText:'Swipe me!',
+                  gestureName: 'none',
+                  backgroundColor: '#fff'}
+  }
+  onSwipeLeft(gestureState) {
+    this.setState({myText: 'You swiped left!'});
   }
   buttonLeft (value,valueLeft) {
     this.setState({valueLeft: valueLeft+1, value: value+1
   })
 }
+  onSwipeRight(gestureState) {
+    this.setState({myText: 'You swiped right!'});
+}
   buttonRight (value,valueRight) {
     this.setState({valueRight: valueRight+1, value: value+1
   })
+}
+
+onSwipe(gestureName, gestureState) {
+  const {SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
+  this.setState({gestureName: gestureName});
+  switch (gestureName) {
+    case SWIPE_LEFT:
+      this.setState({backgroundColor: 'blue'});
+      break;
+    case SWIPE_RIGHT:
+      this.setState({backgroundColor: 'yellow'});
+      break;
+  }
 }
 
   render() {
@@ -39,6 +64,11 @@ class Counter extends Component {
     let valueLeft = this.state.valueLeft;
     let valueRight = this.state.valueRight;
     let photoIndex = value % 50;
+
+    const config = {
+      velocityThreshold: 0.3,
+      directionalOffsetThreshold: 80
+    };
 
     const sources=[require('./TestPhotos/Photo01.jpg'), 
       require('./TestPhotos/Photo02.jpg'), 
@@ -97,6 +127,20 @@ class Counter extends Component {
         <Image source={sources[photoIndex]} 
                 style={style.photoStyle}
                 resizeMode='contain'/>
+        <GestureRecognizer
+            onSwipe={(direction, state) => this.onSwipe(direction, state)}
+            onSwipeLeft={(state) => this.onSwipeLeft(state)}
+            onSwipeRight={(state) => this.onSwipeRight(state)}
+            config={config}
+            style={{
+              flex: 1,
+              backgroundColor: this.state.backgroundColor
+            }}
+            >
+            <Text>{this.state.myText}</Text>
+            <Text>onSwipe callback received gesture: {this.state.gestureName}</Text>
+        </GestureRecognizer>
+
         <View style= {{flex: 1, 
                        flexDirection: 'row'}}>
             <Text style={style.valueStyle}> 
