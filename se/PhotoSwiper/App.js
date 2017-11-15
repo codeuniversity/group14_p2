@@ -15,42 +15,40 @@ export default class Swiper extends Component {
     
     return (
       <View>
-       <Counter/>
+       <Kimera/> 
       </View>
     );
   }
 }
 
-class Counter extends Component {
+class Kimera extends Component {
   constructor(props){
     super(props);
-    this.state = {value:0, 
-                  valueLeft: 0, 
-                  valueRight: 0,
+    this.state = {counter:0, 
+                  folderLeft: 0, 
+                  folderRight: 0,
                   myText:'Swipe me!',
                   gestureName: 'none',
                   backgroundColor: '#F4D03F'}
   }
   onSwipeLeft(gestureState) {
-    this.setState({myText: 'You swiped left!'});
+    this.setState({myText: 'Your picture is in left folder'});
   }
-  buttonLeft (value,valueLeft) {
-    this.setState({valueLeft: valueLeft+1, value: value+1
+  moveLeft (counter,folderLeft) {
+    this.setState({folderLeft: folderLeft+1, counter: counter+1
     })
   }
   onSwipeRight(gestureState) {
-    this.setState({myText: 'You swiped right!'});
+    this.setState({myText: 'Your picture is in right folder'});
   }
-  buttonRight (value,valueRight) {
-    this.setState({valueRight: valueRight+1, value: value+1
-    })
+  moveRight (counter,folderRight) {
+    this.setState({folderRight: folderRight+1, counter: counter+1})
   }
   onSwipeDown(gestureState) {
-    this.setState({myText: 'You swiped down!'});
+    this.setState({myText: 'Your picture will stay in the original folder'});
   }
-  buttonDown (value,valueDown) {
-    this.setState({valueRight: valueRight+1, value: value+1
-    })
+  skip (counter) {
+    this.setState({counter: counter+1})
   }
 
 onSwipe(gestureName, gestureState) {
@@ -58,23 +56,22 @@ onSwipe(gestureName, gestureState) {
   this.setState({gestureName: gestureName});
   switch (gestureName) {
     case SWIPE_LEFT:
-      this.setState({backgroundColor: '#FFE8EF'});
+      this.setState({backgroundColor: '#3FF47B'});
       break;
     case SWIPE_RIGHT:
-      this.setState({backgroundColor: '#FFE889'});
+      this.setState({backgroundColor: '#703FF4'});
       break;
     case SWIPE_DOWN:
-      this.setState({backgroundColor: 'Red'});
+      this.setState({backgroundColor: '#F4523F'});
       break;
   }
 }
 
   render() {
-    let value = this.state.value; 
-    let valueLeft = this.state.valueLeft;
-    let valueRight = this.state.valueRight;
-    let valueDown = this.state.valueDown;
-    let photoIndex = value % 50;
+    let counter = this.state.counter;  
+    let folderLeft = this.state.folderLeft;
+    let folderRight = this.state.folderRight;
+    let photoIndex = counter % 50;
 
     const config = {
       velocityThreshold: 0.3,
@@ -140,9 +137,9 @@ onSwipe(gestureName, gestureState) {
 
         <GestureRecognizer
             onSwipe={(direction, state) => this.onSwipe(direction, state)}
-            onSwipeLeft={(state) => this.buttonLeft(value,valueLeft)}
-            onSwipeRight={(state) => this.buttonRight(value,valueRight)}
-            onSwipeDown={(state) => this.buttonDown(value,valueDown)}
+            onSwipeLeft={(state) => this.moveLeft(counter,folderLeft)}
+            onSwipeRight={(state) => this.moveRight(counter,folderRight)}
+            onSwipeDown={(state) => this.skip(counter)}
             config={config}
             style={{
               flex: 1,
@@ -157,33 +154,33 @@ onSwipe(gestureName, gestureState) {
             <View style= {{flex: 1, 
                            flexDirection: 'row'}}>
             <Text style={style.valueStyle}> 
-              {valueLeft}
+              {folderLeft}
             </Text>
             <Text style={style.valueStyle}> 
-              {value}
+              {counter}
             </Text>
             <Text style={style.valueStyle}>
-              {valueRight}
+              {folderRight}
             </Text>
         </View>
         <View style= {{flex: 1, 
                        flexDirection: 'row',
                        justifyContent: 'center',
                        alignItems: 'center',
-                       marginLeft: 50,
-                       marginRight: 50,
+                       marginLeft: 5,
+                       marginRight: 5,
                        marginTop: 10}}>
             <Button 
-                title="Left" 
-                onPress={() => {this.buttonLeft(value,valueLeft)}}
+                title="Left folder" 
+                onPress={() => {this.moveLeft(counter,folderLeft)}}
               />
             <Button 
-                title="Right" 
-                onPress={() => {this.buttonRight(value,valueRight)}}
+                title="Right folder" 
+                onPress={() => {this.moveRight(counter,folderRight)}}
               />
             <Button 
-                title="Down" 
-                onPress={() => {this.buttonDown(value,valueDown)}}
+                title="Skip" 
+                onPress={() => {this.skip(counter,folderRemain)}}
               />
         </View>
         </GestureRecognizer>
