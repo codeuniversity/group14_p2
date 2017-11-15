@@ -25,8 +25,61 @@ class Kimera extends Component {
   constructor(props){
     super(props);
     this.state = {counter:0, 
-                  folderLeft: 0, 
-                  folderRight: 0,
+                  counterLeft: 0, 
+                  counterRight: 0,
+                  rightFolder: [],
+                  leftFolder: [],
+                  sources: [
+                    require('./TestPhotos/Photo02.jpg'), 
+                    require('./TestPhotos/Photo01.jpg'), 
+                    require('./TestPhotos/Photo03.jpg'), 
+                    require('./TestPhotos/Photo04.jpg'), 
+                    require('./TestPhotos/Photo05.jpg'), 
+                    require('./TestPhotos/Photo06.jpg'),
+                    require('./TestPhotos/Photo07.jpg'), 
+                    require('./TestPhotos/Photo08.jpg'), 
+                    require('./TestPhotos/Photo09.jpg'), 
+                    require('./TestPhotos/Photo10.jpg'),
+                    require('./TestPhotos/Photo11.jpg'), 
+                    require('./TestPhotos/Photo12.jpg'), 
+                    require('./TestPhotos/Photo13.jpg'), 
+                    require('./TestPhotos/Photo14.jpg'), 
+                    require('./TestPhotos/Photo15.jpg'), 
+                    require('./TestPhotos/Photo16.jpg'), 
+                    require('./TestPhotos/Photo17.jpg'), 
+                    require('./TestPhotos/Photo18.jpg'), 
+                    require('./TestPhotos/Photo19.jpg'), 
+                    require('./TestPhotos/Photo20.jpg'), 
+                    require('./TestPhotos/Photo21.jpg'), 
+                    require('./TestPhotos/Photo22.jpg'), 
+                    require('./TestPhotos/Photo23.jpg'), 
+                    require('./TestPhotos/Photo24.jpg'), 
+                    require('./TestPhotos/Photo25.jpg'), 
+                    require('./TestPhotos/Photo26.jpg'), 
+                    require('./TestPhotos/Photo27.jpg'), 
+                    require('./TestPhotos/Photo28.jpg'), 
+                    require('./TestPhotos/Photo29.jpg'), 
+                    require('./TestPhotos/Photo30.jpg'),
+                    require('./TestPhotos/Photo31.jpg'),
+                    require('./TestPhotos/Photo32.jpg'),
+                    require('./TestPhotos/Photo33.jpg'),
+                    require('./TestPhotos/Photo34.jpg'),
+                    require('./TestPhotos/Photo35.jpg'),
+                    require('./TestPhotos/Photo36.jpg'),
+                    require('./TestPhotos/Photo37.jpg'),
+                    require('./TestPhotos/Photo38.jpg'),
+                    require('./TestPhotos/Photo39.jpg'),
+                    require('./TestPhotos/Photo40.jpg'),
+                    require('./TestPhotos/Photo41.png'),
+                    require('./TestPhotos/Photo42.jpg'),
+                    require('./TestPhotos/Photo43.png'),
+                    require('./TestPhotos/Photo44.jpg'),
+                    require('./TestPhotos/Photo45.jpg'),
+                    require('./TestPhotos/Photo46.jpg'),
+                    require('./TestPhotos/Photo47.jpg'),
+                    require('./TestPhotos/Photo48.jpg'),
+                    require('./TestPhotos/Photo49.jpg'),
+                    require('./TestPhotos/Photo50.jpg')],
                   myText:'Swipe me!',
                   gestureName: 'none',
                   backgroundColor: '#F4D03F'}
@@ -34,15 +87,17 @@ class Kimera extends Component {
   onSwipeLeft(gestureState) {
     this.setState({myText: 'Your picture is in left folder'});
   }
-  moveLeft (counter,folderLeft) {
-    this.setState({folderLeft: folderLeft+1, counter: counter+1
-    })
+  moveLeft (counter,counterLeft) {
+    this.setState({counterLeft: counterLeft+1, counter: counter+1})
+    this.setState({leftFolder: this.state.leftFolder.concat(this.state.sources[counter])})
   }
   onSwipeRight(gestureState) {
     this.setState({myText: 'Your picture is in right folder'});
   }
-  moveRight (counter,folderRight) {
-    this.setState({folderRight: folderRight+1, counter: counter+1})
+  moveRight (counter,counterRight) {
+    this.setState({counterRight: counterRight+1, counter: counter+1}) 
+    this.setState({rightFolder: this.state.rightFolder.concat(this.state.sources[counter])})
+    this.state.sources.splice(counter, 1)
   }
   onSwipeDown(gestureState) {
     this.setState({myText: 'Your picture will stay in the original folder'});
@@ -69,76 +124,23 @@ onSwipe(gestureName, gestureState) {
 
   render() {
     let counter = this.state.counter;  
-    let folderLeft = this.state.folderLeft;
-    let folderRight = this.state.folderRight;
+    let counterLeft = this.state.counterLeft;
+    let counterRight = this.state.counterRight;
     let photoIndex = counter % 50;
 
     const config = {
       velocityThreshold: 0.3,
       directionalOffsetThreshold: 80
     };
-
-    const sources=[
-      require('./TestPhotos/Photo02.jpg'), 
-      require('./TestPhotos/Photo01.jpg'), 
-      require('./TestPhotos/Photo03.jpg'), 
-      require('./TestPhotos/Photo04.jpg'), 
-      require('./TestPhotos/Photo05.jpg'), 
-      require('./TestPhotos/Photo06.jpg'),
-      require('./TestPhotos/Photo07.jpg'), 
-      require('./TestPhotos/Photo08.jpg'), 
-      require('./TestPhotos/Photo09.jpg'), 
-      require('./TestPhotos/Photo10.jpg'),
-      require('./TestPhotos/Photo11.jpg'), 
-      require('./TestPhotos/Photo12.jpg'), 
-      require('./TestPhotos/Photo13.jpg'), 
-      require('./TestPhotos/Photo14.jpg'), 
-      require('./TestPhotos/Photo15.jpg'), 
-      require('./TestPhotos/Photo16.jpg'), 
-      require('./TestPhotos/Photo17.jpg'), 
-      require('./TestPhotos/Photo18.jpg'), 
-      require('./TestPhotos/Photo19.jpg'), 
-      require('./TestPhotos/Photo20.jpg'), 
-      require('./TestPhotos/Photo21.jpg'), 
-      require('./TestPhotos/Photo22.jpg'), 
-      require('./TestPhotos/Photo23.jpg'), 
-      require('./TestPhotos/Photo24.jpg'), 
-      require('./TestPhotos/Photo25.jpg'), 
-      require('./TestPhotos/Photo26.jpg'), 
-      require('./TestPhotos/Photo27.jpg'), 
-      require('./TestPhotos/Photo28.jpg'), 
-      require('./TestPhotos/Photo29.jpg'), 
-      require('./TestPhotos/Photo30.jpg'),
-      require('./TestPhotos/Photo31.jpg'),
-      require('./TestPhotos/Photo32.jpg'),
-      require('./TestPhotos/Photo33.jpg'),
-      require('./TestPhotos/Photo34.jpg'),
-      require('./TestPhotos/Photo35.jpg'),
-      require('./TestPhotos/Photo36.jpg'),
-      require('./TestPhotos/Photo37.jpg'),
-      require('./TestPhotos/Photo38.jpg'),
-      require('./TestPhotos/Photo39.jpg'),
-      require('./TestPhotos/Photo40.jpg'),
-      require('./TestPhotos/Photo41.png'),
-      require('./TestPhotos/Photo42.jpg'),
-      require('./TestPhotos/Photo43.png'),
-      require('./TestPhotos/Photo44.jpg'),
-      require('./TestPhotos/Photo45.jpg'),
-      require('./TestPhotos/Photo46.jpg'),
-      require('./TestPhotos/Photo47.jpg'),
-      require('./TestPhotos/Photo48.jpg'),
-      require('./TestPhotos/Photo49.jpg'),
-      require('./TestPhotos/Photo50.jpg')]
-
-    
+             
     return (
       <View style= {{flex: 1, 
                      flexDirection: 'column'}}>
 
         <GestureRecognizer
             onSwipe={(direction, state) => this.onSwipe(direction, state)}
-            onSwipeLeft={(state) => this.moveLeft(counter,folderLeft)}
-            onSwipeRight={(state) => this.moveRight(counter,folderRight)}
+            onSwipeLeft={(state) => this.moveLeft(counter,counterLeft)}
+            onSwipeRight={(state) => this.moveRight(counter,counterRight)}
             onSwipeDown={(state) => this.skip(counter)}
             config={config}
             style={{
@@ -146,7 +148,7 @@ onSwipe(gestureName, gestureState) {
               backgroundColor: this.state.backgroundColor
             }}
             >
-            <Image source={sources[photoIndex]} 
+            <Image source={this.state.sources[photoIndex]} 
                 style={style.photoStyle}
                 resizeMode='contain'/>
             <Text>{this.state.myText}</Text>
@@ -154,13 +156,13 @@ onSwipe(gestureName, gestureState) {
             <View style= {{flex: 1, 
                            flexDirection: 'row'}}>
             <Text style={style.valueStyle}> 
-              {folderLeft}
+              {counterLeft}
             </Text>
             <Text style={style.valueStyle}> 
               {counter}
             </Text>
             <Text style={style.valueStyle}>
-              {folderRight}
+              {counterRight}
             </Text>
         </View>
         <View style= {{flex: 1, 
@@ -172,11 +174,11 @@ onSwipe(gestureName, gestureState) {
                        marginTop: 10}}>
             <Button 
                 title="Left folder" 
-                onPress={() => {this.moveLeft(counter,folderLeft)}}
+                onPress={() => {this.moveLeft(counter,counterLeft)}}      
               />
             <Button 
                 title="Right folder" 
-                onPress={() => {this.moveRight(counter,folderRight)}}
+                onPress={() => {this.moveRight(counter,counterRight)}}  
               />
             <Button 
                 title="Skip" 
