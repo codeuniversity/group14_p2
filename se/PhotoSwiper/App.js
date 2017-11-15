@@ -45,9 +45,16 @@ class Counter extends Component {
     this.setState({valueRight: valueRight+1, value: value+1
     })
   }
+  onSwipeDown(gestureState) {
+    this.setState({myText: 'You swiped down!'});
+  }
+  buttonDown (value,valueDown) {
+    this.setState({valueRight: valueRight+1, value: value+1
+    })
+  }
 
 onSwipe(gestureName, gestureState) {
-  const {SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
+  const {SWIPE_LEFT, SWIPE_RIGHT, SWIPE_DOWN} = swipeDirections;
   this.setState({gestureName: gestureName});
   switch (gestureName) {
     case SWIPE_LEFT:
@@ -56,6 +63,9 @@ onSwipe(gestureName, gestureState) {
     case SWIPE_RIGHT:
       this.setState({backgroundColor: '#FFE889'});
       break;
+    case SWIPE_DOWN:
+      this.setState({backgroundColor: 'Red'});
+      break;
   }
 }
 
@@ -63,6 +73,7 @@ onSwipe(gestureName, gestureState) {
     let value = this.state.value; 
     let valueLeft = this.state.valueLeft;
     let valueRight = this.state.valueRight;
+    let valueDown = this.state.valueDown;
     let photoIndex = value % 50;
 
     const config = {
@@ -131,6 +142,7 @@ onSwipe(gestureName, gestureState) {
             onSwipe={(direction, state) => this.onSwipe(direction, state)}
             onSwipeLeft={(state) => this.buttonLeft(value,valueLeft)}
             onSwipeRight={(state) => this.buttonRight(value,valueRight)}
+            onSwipeDown={(state) => this.buttonDown(value,valueDown)}
             config={config}
             style={{
               flex: 1,
@@ -143,7 +155,7 @@ onSwipe(gestureName, gestureState) {
             <Text>{this.state.myText}</Text>
             <Text>onSwipe callback received gesture: {this.state.gestureName}</Text>
             <View style= {{flex: 1, 
-                       flexDirection: 'row'}}>
+                           flexDirection: 'row'}}>
             <Text style={style.valueStyle}> 
               {valueLeft}
             </Text>
@@ -168,6 +180,10 @@ onSwipe(gestureName, gestureState) {
             <Button 
                 title="Right" 
                 onPress={() => {this.buttonRight(value,valueRight)}}
+              />
+            <Button 
+                title="Down" 
+                onPress={() => {this.buttonDown(value,valueDown)}}
               />
         </View>
         </GestureRecognizer>
