@@ -29,32 +29,32 @@ class Counter extends Component {
                   valueRight: 0,
                   myText:'Swipe me!',
                   gestureName: 'none',
-                  backgroundColor: '#fff'}
+                  backgroundColor: '#F4D03F'}
   }
   onSwipeLeft(gestureState) {
     this.setState({myText: 'You swiped left!'});
   }
   buttonLeft (value,valueLeft) {
     this.setState({valueLeft: valueLeft+1, value: value+1
-  })
-}
+    })
+  }
   onSwipeRight(gestureState) {
     this.setState({myText: 'You swiped right!'});
-}
+  }
   buttonRight (value,valueRight) {
     this.setState({valueRight: valueRight+1, value: value+1
-  })
-}
+    })
+  }
 
 onSwipe(gestureName, gestureState) {
   const {SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
   this.setState({gestureName: gestureName});
   switch (gestureName) {
     case SWIPE_LEFT:
-      this.setState({backgroundColor: 'blue'});
+      this.setState({backgroundColor: '#FFE8EF'});
       break;
     case SWIPE_RIGHT:
-      this.setState({backgroundColor: 'yellow'});
+      this.setState({backgroundColor: '#FFE889'});
       break;
   }
 }
@@ -70,8 +70,9 @@ onSwipe(gestureName, gestureState) {
       directionalOffsetThreshold: 80
     };
 
-    const sources=[require('./TestPhotos/Photo01.jpg'), 
+    const sources=[
       require('./TestPhotos/Photo02.jpg'), 
+      require('./TestPhotos/Photo01.jpg'), 
       require('./TestPhotos/Photo03.jpg'), 
       require('./TestPhotos/Photo04.jpg'), 
       require('./TestPhotos/Photo05.jpg'), 
@@ -128,8 +129,8 @@ onSwipe(gestureName, gestureState) {
 
         <GestureRecognizer
             onSwipe={(direction, state) => this.onSwipe(direction, state)}
-            onSwipeLeft={(state) => this.onSwipeLeft(state)}
-            onSwipeRight={(state) => this.onSwipeRight(state)}
+            onSwipeLeft={(state) => this.buttonLeft(value,valueLeft)}
+            onSwipeRight={(state) => this.buttonRight(value,valueRight)}
             config={config}
             style={{
               flex: 1,
