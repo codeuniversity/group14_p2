@@ -10,7 +10,6 @@ import React, { Component } from 'react';
 import {View, Text, StyleSheet, Button, Image} from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
-
 export default class Kimera extends Component {
   constructor(props){
     super(props);
@@ -176,7 +175,7 @@ onSwipe(gestureName, gestureState) {
               />
             <Button 
                 title="Skip" 
-                onPress={() => {this.skip(counter,folderRemain)}}
+                onPress={() => {this.skip(counter)}}
               />
         </View>
         </GestureRecognizer>
