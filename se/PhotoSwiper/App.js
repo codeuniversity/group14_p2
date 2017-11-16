@@ -79,22 +79,22 @@ export default class Kimera extends Component {
   }
   moveLeft (counter,counterLeft) {
     this.setState({counterLeft: counterLeft+1, counter: counter+1})
-    this.setState({leftFolder: this.state.leftFolder.concat(this.state.sources[counter])})
-    this.state.sources.splice(counter, 1)    
+    this.setState({leftFolder: this.state.leftFolder.concat(this.state.sources[this.state.index])})
+    this.state.sources.splice(this.state.index, 1)    
   }
   onSwipeRight(gestureState) {
     this.setState({myText: 'Your picture is in right folder'});
   }
   moveRight (counter,counterRight) {
     this.setState({counterRight: counterRight+1, counter: counter+1}) 
-    this.setState({rightFolder: this.state.rightFolder.concat(this.state.sources[counter])})
-    this.state.sources.splice(counter, 1)
+    this.setState({rightFolder: this.state.rightFolder.concat(this.state.sources[this.state.index])})
+    this.state.sources.splice(this.state.index, 1)
   }
   onSwipeDown(gestureState) {
     this.setState({myText: 'Your picture will stay in the original folder'});
   }
   skip (counter) {
-    this.setState({counter: counter+1})
+    this.setState({counter: counter+1, index: (this.state.index + 1) % this.state.sources.length})
   }
 
 onSwipe(gestureName, gestureState) {
@@ -117,7 +117,6 @@ onSwipe(gestureName, gestureState) {
     let counter = this.state.counter;  
     let counterLeft = this.state.counterLeft;
     let counterRight = this.state.counterRight;
-    let photoIndex = this.state.index % this.state.sources.length;
 
     const config = {
       velocityThreshold: 0.3,
@@ -139,7 +138,7 @@ onSwipe(gestureName, gestureState) {
               backgroundColor: this.state.backgroundColor
             }}
             >
-            <Image source={this.state.sources[photoIndex]} 
+            <Image source={this.state.sources[this.state.index]} 
                    style={style.photoStyle}
                    resizeMode='contain'/>
             <Text>
