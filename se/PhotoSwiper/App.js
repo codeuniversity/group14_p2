@@ -14,8 +14,6 @@ export default class Kimera extends Component {
   constructor(props){
     super(props);
     this.state = {counter:0, 
-                  counterLeft: 0, 
-                  counterRight: 0,
                   rightFolder: [],
                   leftFolder: [],
                   sources: [
@@ -77,16 +75,16 @@ export default class Kimera extends Component {
   onSwipeLeft(gestureState) {
     this.setState({myText: 'Your picture is in left folder'});
   }
-  moveLeft (counter,counterLeft) {
-    this.setState({counterLeft: counterLeft+1, counter: counter+1})
+  moveLeft (counter) {
+    this.setState({counter: counter+1})
     this.setState({leftFolder: this.state.leftFolder.concat(this.state.sources[this.state.index])})
     this.state.sources.splice(this.state.index, 1)    
   }
   onSwipeRight(gestureState) {
     this.setState({myText: 'Your picture is in right folder'});
   }
-  moveRight (counter,counterRight) {
-    this.setState({counterRight: counterRight+1, counter: counter+1}) 
+  moveRight (counter) {
+    this.setState({counter: counter+1}) 
     this.setState({rightFolder: this.state.rightFolder.concat(this.state.sources[this.state.index])})
     this.state.sources.splice(this.state.index, 1)
   }
@@ -115,8 +113,6 @@ onSwipe(gestureName, gestureState) {
 
   render() {
     let counter = this.state.counter;  
-    let counterLeft = this.state.counterLeft;
-    let counterRight = this.state.counterRight;
 
     const config = {
       velocityThreshold: 0.3,
@@ -129,9 +125,9 @@ onSwipe(gestureName, gestureState) {
 
         <GestureRecognizer
             onSwipe={(direction, state) => this.onSwipe(direction, state)}
-            onSwipeLeft={(state) => this.moveLeft(counter,counterLeft)}
+            onSwipeLeft={(state) => this.moveLeft(counter)}
             onSwipeDown={(state) => this.skip(counter)}
-            onSwipeRight={(state) => this.moveRight(counter,counterRight)}
+            onSwipeRight={(state) => this.moveRight(counter)}
             config={config}
             style={{
               flex: 1,
@@ -150,13 +146,13 @@ onSwipe(gestureName, gestureState) {
             <View style= {{flex: 1, 
                            flexDirection: 'row'}}>
             <Text style={style.valueStyle}> 
-              {counterLeft}
+              {this.state.leftFolder.length}
               </Text>
             <Text style={style.valueStyle}> 
               {counter}
               </Text>
             <Text style={style.valueStyle}>
-              {counterRight}
+              {this.state.rightFolder.length}
               </Text>
         </View>
         <View style= {{flex: 1, 
@@ -168,7 +164,7 @@ onSwipe(gestureName, gestureState) {
                        marginTop: 10}}>
             <Button 
                 title="Left folder" 
-                onPress={() => {this.moveLeft(counter,counterLeft)}}      
+                onPress={() => {this.moveLeft(counter)}}      
               />
             <Button 
                 title="Skip" 
@@ -176,7 +172,7 @@ onSwipe(gestureName, gestureState) {
               />
             <Button 
                 title="Right folder" 
-                onPress={() => {this.moveRight(counter,counterRight)}}  
+                onPress={() => {this.moveRight(counter)}}  
               />
         </View>
         </GestureRecognizer>
