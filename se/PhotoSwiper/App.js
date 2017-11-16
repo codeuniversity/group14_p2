@@ -10,18 +10,8 @@ import React, { Component } from 'react';
 import {View, Text, StyleSheet, Button, Image} from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
-export default class Swiper extends Component {
-  render() {
-    
-    return (
-      <View>
-       <Kimera/> 
-      </View>
-    );
-  }
-}
 
-class Kimera extends Component {
+export default class Kimera extends Component {
   constructor(props){
     super(props);
     this.state = {counter:0, 
@@ -149,21 +139,25 @@ onSwipe(gestureName, gestureState) {
             }}
             >
             <Image source={this.state.sources[photoIndex]} 
-                style={style.photoStyle}
-                resizeMode='contain'/>
-            <Text>{this.state.myText}</Text>
-            <Text>onSwipe callback received gesture: {this.state.gestureName}</Text>
+                   style={style.photoStyle}
+                   resizeMode='contain'/>
+            <Text>
+              {this.state.myText}
+              </Text>
+            <Text> 
+              onSwipe callback received gesture: {this.state.gestureName}
+              </Text>
             <View style= {{flex: 1, 
                            flexDirection: 'row'}}>
             <Text style={style.valueStyle}> 
               {counterLeft}
-            </Text>
+              </Text>
             <Text style={style.valueStyle}> 
               {counter}
-            </Text>
+              </Text>
             <Text style={style.valueStyle}>
               {counterRight}
-            </Text>
+              </Text>
         </View>
         <View style= {{flex: 1, 
                        flexDirection: 'row',
