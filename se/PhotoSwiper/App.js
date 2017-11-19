@@ -100,13 +100,13 @@ onSwipe(gestureName, gestureState) {
   this.setState({gestureName: gestureName});
   switch (gestureName) {
     case SWIPE_LEFT:
-      this.setState({backgroundColor: '#3FF47B'});
+      this.setState({backgroundColor: '#E1FFE1'});
       break;
     case SWIPE_DOWN:
-      this.setState({backgroundColor: '#F4523F'});
+      this.setState({backgroundColor: '#E1E9FF'});
       break;
     case SWIPE_RIGHT:
-      this.setState({backgroundColor: '#703FF4'});
+      this.setState({backgroundColor: '#FFF0E1'});
       break;
   }
 }
